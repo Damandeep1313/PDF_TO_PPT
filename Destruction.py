@@ -10,7 +10,7 @@ from io import BytesIO
 import uuid
 import flask
 from importlib.metadata import version
-
+from functools import wraps
 
 
 
@@ -1115,6 +1115,20 @@ class ProfessionalPPTBuilder:
             return ppt_bytes_io
      
 
+
+def api_key_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        api_key = request.headers.get('X-API-KEY')
+        valid_keys = os.getenv('API_KEYS', '').split(',')
+        
+        if not api_key or api_key not in valid_keys:
+            return jsonify({
+                "status": "error",
+                "error": "Invalid or missing API key"
+            }), 403
+        return f(*args, **kwargs)
+    return decorated
     
 # ----------- FLASK APP -----------
 
@@ -1172,6 +1186,8 @@ def generate_presentation(slide_count, summary_text):
 
 
 @app.route("/generate-ppt", methods=["POST"])
+@api_key_required  # Add this line exactly here
+
 def generate_ppt_endpoint():
     """Generate PowerPoint from JSON input with comprehensive error handling"""
     try:
