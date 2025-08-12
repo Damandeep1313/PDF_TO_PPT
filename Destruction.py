@@ -47,6 +47,8 @@ if not OPENAI_API_KEY:
 if not (CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET):
     raise ValueError("Cloudinary credentials missing in .env")
 
+import os
+os.environ["no_proxy"] = "*"  # Disable any proxy settings that might be interfering
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 cloudinary.config(
