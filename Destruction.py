@@ -9,7 +9,7 @@ from io import BytesIO
 import uuid
 import flask
 from importlib.metadata import version
-import openai
+# import openai
 
 
 
