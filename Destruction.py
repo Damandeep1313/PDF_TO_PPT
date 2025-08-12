@@ -4,6 +4,7 @@ import json
 import time
 import hashlib
 import random
+import httpx
 import requests
 from io import BytesIO
 import uuid
