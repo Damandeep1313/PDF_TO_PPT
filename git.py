@@ -1207,6 +1207,9 @@ def generate_presentation(slide_count, summary_text):
 
 
 
+@app.route('/')
+def home():
+    return "Service is live ✅"
 @app.route("/generate-ppt", methods=["POST"])
 @api_key_required  # Add this line exactly here
 
