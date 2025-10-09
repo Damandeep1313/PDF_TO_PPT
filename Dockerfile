@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 5000
 
 # Set environment variables (optional: better to pass at runtime)
-ENV FLASK_APP=git.py
+ENV FLASK_APP=fullscreen.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run Flask server
