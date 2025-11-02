@@ -1221,6 +1221,16 @@ def generate_presentation(slide_count, summary_text):
 
 
 
+# New /ping endpoint added here
+@app.route('/ping', methods=['GET'])
+def ping():
+    """A quick check to confirm the service is alive and running."""
+    return jsonify({
+        "status": "pong",
+        "service": "AI PPT Generator",
+        "timestamp": datetime.now().isoformat()
+    }), 200
+
 
 
 
